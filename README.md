@@ -1,5 +1,3 @@
-# BBylon.de
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
