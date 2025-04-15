@@ -64,18 +64,18 @@
 
         /* --- Logo Styling --- */
         .logo {
-            font-family: var(--heading-font); /* Font für Text wieder da */
-            font-weight: 700;               /* Text wieder fett */
-            font-size: 1.2rem;              /* <<< Text etwas größer */
+            font-family: var(--heading-font);
+            font-weight: 700;
+            font-size: 1.2rem;
             color: var(--primary-color);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 12px;                      /* <<< Abstand wieder da & leicht erhöht */
+            gap: 12px;
         }
 
         #header-logo {
-            height: 80px; /* <<< NOCH ETWAS GRÖSSER (Desktop) */
+            height: 60px; /* Angepasste Höhe für bessere Proportionen */
             width: auto;
         }
         /* --- Ende Logo Styling --- */
@@ -87,7 +87,7 @@
         }
 
         nav ul li {
-            margin-left: 30px; /* <<< Abstand zur Navi erhöht */
+            margin-left: 30px;
         }
 
         nav ul li a {
@@ -99,19 +99,20 @@
         }
 
         nav ul li a:hover,
-        nav ul li a.active {
+        nav ul li a.active { /* .active Klasse könnte man per JS hinzufügen */
             color: var(--secondary-color);
         }
 
         /* Hero Section */
         #hero {
-            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.8)), url('placeholder-bg.jpg'); /* Placeholder - Hintergrundbild wäre ideal */
-            background-color: var(--primary-color); /* Fallback falls kein Bild */
+            /* Optional: Hintergrundbild mit Farbüberlagerung */
+            /* background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.8)), url('dein-hintergrundbild.jpg'); */
+            background-color: var(--primary-color); /* Fallback oder Haupt-Hintergrund */
             background-size: cover;
             background-position: center;
             color: var(--light-text-color);
             text-align: center;
-            padding: 100px 0;
+            padding: 100px 20px; /* Padding auch seitlich für schmalere Viewports */
         }
 
         #hero h1 {
@@ -139,6 +140,8 @@
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none; /* Sicherstellen, dass kein Button-Rand da ist */
+            cursor: pointer; /* Mauszeiger ändern */
         }
 
         .cta-button:hover {
@@ -151,9 +154,18 @@
             padding: 80px 0;
         }
 
-        section:nth-child(even) {
+        section:nth-child(even) { /* Gilt für section innerhalb von main */
             background-color: var(--section-bg-color);
         }
+        /* Korrektur: Die erste Sektion (#hero) soll *nicht* den even-Style bekommen,
+           daher zielen wir auf die Sections *innerhalb* von <main> */
+        main section:nth-child(odd) {
+             background-color: var(--background-color); /* Standard-Weiß */
+        }
+         main section:nth-child(even) {
+             background-color: var(--section-bg-color); /* Leichtes Grau */
+         }
+
 
         .section-title {
             font-family: var(--heading-font);
@@ -211,10 +223,11 @@
 
         /* Prozess Sektion */
         .process-steps {
-            list-style: none;
+            list-style: none; /* Wichtig: Entfernt Standard-Nummerierung */
             counter-reset: process-counter;
             max-width: 800px;
             margin: 30px auto 0 auto;
+            padding-left: 0; /* Entfernt Standard-Einrückung der Liste */
         }
 
         .process-steps li {
@@ -252,13 +265,15 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            list-style: none;
+            list-style: none; /* Wichtig: Standard-Aufzählungszeichen entfernen */
             margin-top: 30px;
+            padding-left: 0; /* Standard-Einrückung entfernen */
         }
 
         #why-us .benefits-list li {
            padding-left: 25px;
            position: relative;
+           margin-bottom: 10px; /* Etwas Abstand zwischen den Punkten */
         }
          #why-us .benefits-list li::before {
             content: '✓'; /* Checkmark Symbol */
@@ -270,19 +285,18 @@
 
 
         /* Kontakt Sektion */
-        #contact p.intro-text { /* Eigene Klasse für den Intro-Text */
+        #contact p.intro-text {
             text-align: center;
-            margin-bottom: 40px; /* Mehr Abstand zum Formular */
+            margin-bottom: 40px;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* Styling für das Kontaktformular */
         #contact form {
             max-width: 600px;
             margin: 30px auto 0 auto;
-            padding: 25px;
+            padding: 30px; /* Etwas mehr Padding */
             background-color: var(--background-color);
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -320,7 +334,10 @@
 
 
         #contact button[type="submit"] {
-            display: inline-block;
+            display: block; /* Lässt den Button die volle Breite einnehmen */
+            width: 100%;   /* Volle Breite innerhalb des Formulars */
+            max-width: 250px; /* Maximale Breite für Ästhetik */
+            margin: 10px auto 0 auto; /* Zentriert den Button */
             background-color: var(--primary-color);
             color: var(--light-text-color);
             padding: 12px 25px;
@@ -338,24 +355,32 @@
             transform: translateY(-2px);
         }
 
+        /* Sternchen für Pflichtfelder */
+        label .required-star {
+            color: red;
+            margin-left: 2px;
+        }
 
         /* Footer */
         footer {
             background-color: var(--primary-color);
-            color: var(--light-text-color);
+            color: var(--accent-color); /* Hellere Schrift für besseren Kontrast auf dunklem Blau */
             text-align: center;
-            padding: 20px 0;
-            margin-top: 60px; /* Abstand zur letzten Sektion */
+            padding: 30px 20px; /* Mehr Padding */
+            margin-top: 60px;
         }
 
         footer p {
             font-size: 0.9rem;
+            margin: 0; /* Standard-Absatz-Margin entfernen */
         }
-        footer a { /* Links im Footer auch hell machen */
-             color: var(--accent-color);
+        footer a {
+             color: var(--accent-color); /* Links im Footer auch hell */
              text-decoration: none;
+             transition: color 0.3s ease;
         }
         footer a:hover {
+            color: var(--light-text-color); /* Etwas heller beim Hover */
             text-decoration: underline;
         }
 
@@ -365,32 +390,43 @@
                 flex-direction: column;
                 align-items: center;
             }
-            /* --- Logo Responsive Anpassung --- */
+
             .logo {
-                 margin-bottom: 15px; /* Abstand zur Navi auf Mobile */
-                 font-size: 1.1rem; /* Text auf Mobile etwas kleiner als Desktop */
+                 margin-bottom: 15px;
+                 font-size: 1.1rem;
             }
             #header-logo {
-                height: 65px; /* <<< Größe für Mobile */
+                height: 50px; /* Logo etwas kleiner auf Mobile */
             }
-             /* --- Ende Logo Responsive Anpassung --- */
 
+            nav {
+                width: 100%; /* Volle Breite für die Navi auf Mobile */
+            }
             nav ul {
                 margin-top: 0;
                 padding: 0;
                 justify-content: center;
-                flex-wrap: wrap;
+                flex-wrap: wrap; /* Erlaubt Umbruch bei vielen Menüpunkten */
             }
             nav ul li {
-                margin: 5px 10px;
+                margin: 5px 10px; /* Kleinere Abstände */
+            }
+            nav ul li a {
+                font-size: 0.95rem; /* Leicht kleinere Schrift */
             }
 
+            #hero {
+                padding: 80px 20px;
+            }
             #hero h1 {
                 font-size: 2.2rem;
             }
-
             #hero p {
-                font-size: 1rem;
+                font-size: 1.1rem; /* Angepasst */
+            }
+
+            section {
+                 padding: 60px 0; /* Weniger Padding auf Mobile */
             }
 
             .section-title {
@@ -398,7 +434,7 @@
             }
 
             .services-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Einspaltig auf Mobile */
             }
 
              .process-steps li {
@@ -409,7 +445,40 @@
                  height: 30px;
                  font-size: 0.9rem;
              }
+
+             #why-us .benefits-list {
+                 grid-template-columns: 1fr; /* Einspaltig auf Mobile */
+             }
+
+             #contact form {
+                 padding: 20px; /* Weniger Padding im Formular */
+             }
         }
+
+         @media (max-width: 480px) {
+             #hero h1 {
+                 font-size: 1.8rem; /* Noch kleiner auf sehr schmalen Geräten */
+             }
+             #hero p {
+                 font-size: 1rem;
+             }
+             .section-title {
+                 font-size: 1.6rem;
+             }
+             .cta-button, #contact button[type="submit"] {
+                 font-size: 0.95rem;
+                 padding: 10px 20px;
+             }
+              #header-logo {
+                height: 45px; /* Logo noch kleiner */
+              }
+              nav ul li {
+                margin: 5px 8px; /* Noch kleinere Abstände */
+              }
+              nav ul li a {
+                font-size: 0.9rem;
+              }
+         }
 
     </style>
 </head>
@@ -419,8 +488,9 @@
         <div class="container">
             <!-- Logo mit Bild UND Text -->
             <a href="#hero" class="logo">
+                <!-- WICHTIG: Stelle sicher, dass der Pfad zum Logo korrekt ist! -->
                 <img src="BBylon_Logo.png" alt="BBylon Logo" id="header-logo">
-                <span>BBylon</span> <!-- <<< Text ist wieder da -->
+                <span>BBylon</span>
             </a>
             <nav>
                 <ul>
@@ -439,6 +509,7 @@
             <div class="container">
                 <h1>Verbinden europäische Unternehmen mit Top-Talenten</h1>
                 <p>Wir sind Ihr spezialisierter Partner für die Rekrutierung und Vermittlung vorqualifizierter Fachkräfte aus ganz Europa. Finden Sie die Mitarbeiter, die Ihr Unternehmen wirklich voranbringen.</p>
+                <!-- Verlinkt zum Kontaktbereich -->
                 <a href="#contact" class="cta-button">Unverbindliche Anfrage</a>
             </div>
         </section>
@@ -543,35 +614,36 @@
                     Haben Sie Interesse oder Fragen? Füllen Sie einfach das Formular aus und wir werden uns umgehend bei Ihnen melden. Wir freuen uns darauf, von Ihnen zu hören!
                 </p>
 
-                <!-- ====== Start Kontaktformular - Verwendet Ihre Formspree URL ====== -->
+                <!-- ====== Start Kontaktformular - Verwendet Deine Formspree URL ====== -->
+                <!-- Stelle sicher, dass die action URL korrekt ist! -->
                 <form action="https://formspree.io/f/mpwpkpwz" method="POST">
                     <div class="form-group">
-                        <label for="vorname">Vorname <span style="color:red;">*</span></label>
+                        <label for="vorname">Vorname <span class="required-star">*</span></label>
                         <input type="text" id="vorname" name="Vorname" required>
                     </div>
                     <div class="form-group">
-                        <label for="nachname">Nachname <span style="color:red;">*</span></label>
+                        <label for="nachname">Nachname <span class="required-star">*</span></label>
                         <input type="text" id="nachname" name="Nachname" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">E-Mail-Adresse <span style="color:red;">*</span></label>
+                        <label for="email">E-Mail-Adresse <span class="required-star">*</span></label>
                         <input type="email" id="email" name="E-Mail" required>
                     </div>
                     <div class="form-group">
-                        <label for="telefon">Telefonnummer <span style="color:red;">*</span></label>
+                        <label for="telefon">Telefonnummer <span class="required-star">*</span></label>
                         <input type="tel" id="telefon" name="Telefonnummer" required>
                     </div>
                     <div class="form-group">
-                        <label for="nachricht">Ihre Nachricht (Optional)</label>
-                        <textarea id="nachricht" name="Nachricht" rows="5"></textarea>
+                        <label for="nachricht">Ihre Nachricht</label> <!-- Optional, daher kein Stern -->
+                        <textarea id="nachricht" name="Nachricht" rows="5" placeholder="Geben Sie hier Ihre Nachricht oder Frage ein..."></textarea>
                     </div>
 
                      <!-- Optional: Honeypot-Feld gegen einfache Bots (versteckt) -->
-                     <input type="text" name="_gotcha" style="display:none">
+                     <input type="text" name="_gotcha" style="display:none !important"> <!-- Wichtig: !important um sicherzustellen, dass es versteckt bleibt -->
 
-                    <div style="text-align: center;">
-                        <button type="submit">Anfrage senden</button>
-                    </div>
+                    <!-- Zentrierter Button -->
+                    <button type="submit" class="cta-button">Anfrage senden</button>
+
                 </form>
                  <!-- ====== Ende Kontaktformular ====== -->
 
@@ -581,10 +653,14 @@
 
     <footer>
         <div class="container">
-            <p>© 2023 BBylon. Alle Rechte vorbehalten. | <a href="#impressum">Impressum</a> | <a href="#datenschutz">Datenschutz</a></p>
-            <!-- Hinweis: Fügen Sie hier noch Links zu Impressum und Datenschutz ein oder erstellen Sie entsprechende Abschnitte/Seiten -->
+            <!-- Hinweis: Ersetze #impressum und #datenschutz durch echte Links zu deinen Seiten/Abschnitten -->
+            <p>© 2024 BBylon. Alle Rechte vorbehalten. | <a href="#impressum">Impressum</a> | <a href="#datenschutz">Datenschutz</a></p>
+            <!-- Du müsstest noch Abschnitte oder separate Seiten für Impressum und Datenschutz erstellen -->
         </div>
     </footer>
+
+    <!-- Optional: JavaScript hinzufügen, falls benötigt (z.B. für aktive Menüpunkte, erweiterte Formularvalidierung etc.) -->
+    <!-- <script src="script.js"></script> -->
 
 </body>
 </html>
